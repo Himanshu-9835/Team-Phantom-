@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment & Verification - TEAM PHANTOM</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rajdhani:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #070b14;
+      --card-bg: #0f172a;
+      --accent-gold: #f59e0b;
+      --accent-green: #22c55e;
+      --accent-blue: #0284c7;
+      --text-white: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #1e293b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-white);
+      background-image: radial-gradient(circle at 50% 0%, #172554 0%, transparent 60%);
+      min-height: 100vh;
+      padding: 20px 16px 50px;
+    }
+
+    .top-bar {
+      max-width: 560px;
+      margin: 0 auto 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .back-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--accent-gold); }
+
+    .brand-title {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .brand-title span { color: var(--accent-gold); }
+
+    .payment-box {
+      max-width: 560px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 22px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    }
+
+    .batch-header {
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 18px;
+      margin-bottom: 20px;
+    }
+    .batch-badge {
+      font-size: 11px;
+      font-family: 'Rajdhani', sans-serif;
+      color: var(--accent-gold);
+      letter-spacing: 1.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .batch-header h1 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .fee-tag {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--accent-green);
+      font-family: 'Rajdhani', sans-serif;
+      margin-top: 4px;
+    }
+
+    /* INSTRUCTIONS BOX */
+    .instruction-card {
+      background: rgba(15, 23, 42, 0.85);
+      border-left: 3px solid var(--accent-gold);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-bottom: 22px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #cbd5e1;
+    }
+    .instruction-card b {
+      color: var(--accent-gold);
+      font-family: 'Rajdhani', sans-serif;
+      letter-spacing: 0.5px;
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+    .instruction-card ol {
+      padding-left: 18px;
+    }
+    .instruction-card li {
+      margin-bottom: 4px;
+    }
+
+    /* QR AREA */
+    .qr-area {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .qr-wrap {
+      background: #ffffff;
+      padding: 12px;
+      border-radius: 12px;
+      display: inline-block;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    }
+    .qr-wrap img {
+      width: 175px;
+      height: 175px;
+      display: block;
+      object-fit: contain;
+    }
+    .qr-note {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    /* FORM */
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .form-input {
+      width: 100%;
+      background: #0b1120;
+      border: 1px solid #334155;
+      padding: 12px 14px;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 14px;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent-gold);
+    }
+
+    /* BUTTONS */
+    .btn-pay-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: #000;
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 14px;
+      font-family: 'Rajdhani', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.25);
+    }
+    .btn-pay-submit:hover {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+    }
+
+    .btn-telegram-proof {
+      display: block;
+      width: 100%;
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: #fff;
+      border: none;
+      text-decoration: none;
+      text-align: center;
+      padding: 13px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 14px;
+      font-family: 'Rajdhani', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: all 0.2s;
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+    }
+    .btn-telegram-proof:hover {
+      background: linear-gradient(135deg, #0ea5e9, #0284c7);
+      box-shadow: 0 6px 20px rgba(2, 132, 199, 0.45);
+    }
+
+    /* STATUS FEEDBACK BOX */
+    .status-panel {
+      display: none;
+      margin-top: 20px;
+      padding: 18px;
+      border-radius: 10px;
+      background: #0b1120;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+    .status-panel h3 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+    .status-panel p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .btn-classroom-enter {
+      display: none;
+      width: 100%;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #fff;
+      text-decoration: none;
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 15px;
+      font-family: 'Rajdhani', sans-serif;
+      text-transform: uppercase;
+      margin-top: 15px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <a href="index.html" class="back-link">← Back to Batches</a>
+    <div class="brand-title">Team <span>Phantom</span></div>
+  </div>
+
+  <main class="payment-box">
+    <div class="batch-header">
+      <div class="batch-badge">Enrolling In</div>
+      <h1 id="batch-title">Batch Name</h1>
+      <div class="fee-tag" id="batch-fee">₹--</div>
+    </div>
+
+    <!-- 1. ENROLLMENT & VERIFICATION INSTRUCTIONS -->
+    <div class="instruction-card">
+      <b>HOW TO COMPLETE YOUR VERIFICATION:</b>
+      <ol>
+        <li>Scan the QR code below and complete fee payment via any UPI App (GPay, PhonePe, Paytm).</li>
+        <li>Enter your <b>Full Name</b> and <b>12-digit UPI UTR / Transaction ID</b> in the form.</li>
+        <li>Click <b>Confirm Payment & Request Access</b> to notify the administrator.</li>
+        <li>Click <b>Send Payment Screenshot on Telegram</b> to submit your payment proof for matching.</li>
+      </ol>
+    </div>
+
+    <!-- 2. QR CODE -->
+    <div class="qr-area">
+      <div class="qr-wrap">
+        <img src="my-qr.jpeg" alt="Payment QR" onerror="this.src='https://via.placeholder.com/175/ffffff/000000?text=Scan+QR'" />
+      </div>
+      <p class="qr-note">Scan & Pay using PhonePe, Google Pay, Paytm, or BHIM</p>
+    </div>
+
+    <!-- 3. DETAILS FORM & ACTION BUTTONS -->
+    <div id="form-container">
+      <div class="form-group">
+        <label for="s-name">Student Full Name</label>
+        <input type="text" id="s-name" class="form-input" placeholder="e.g. Aman Verma" />
+      </div>
+
+      <div class="form-group">
+        <label for="s-utr">12-Digit UPI UTR / Transaction ID</label>
+        <input type="text" id="s-utr" class="form-input" placeholder="e.g. 423589127890" maxlength="22" />
+      </div>
+
+      <!-- PRIMARY SUBMIT BUTTON -->
+      <button type="button" id="confirm-btn" class="btn-pay-submit" onclick="submitPayment()">
+        Confirm Payment & Request Access
+      </button>
+
+      <!-- TELEGRAM PROOF BUTTON -->
+      <button type="button" class="btn-telegram-proof" onclick="sendTelegramProof()">
+        Send Payment Screenshot on Telegram
+      </button>
+    </div>
+
+    <!-- 4. LIVE STATUS PANEL (UPDATES AUTOMATICALLY ON MOBILE APPROVE) -->
+    <div id="status-panel" class="status-panel">
+      <h3 id="status-title" style="color: var(--accent-gold);">Verification Pending ⏳</h3>
+      <p id="status-desc">Your payment request has reached the administrator. Once your screenshot is matched with bank records, this batch unlocks automatically.</p>
+      
+      <button type="button" class="btn-telegram-proof" style="margin-top: 14px;" onclick="sendTelegramProof()">
+        Submit Payment Screenshot on Telegram
+      </button>
+
+      <a id="enter-btn" href="#" class="btn-classroom-enter">Enter Classroom 🟢</a>
+    </div>
+  </main>
+
+  <script>
+    // ========================================================
+    // ⚙️ TEAM PHANTOM ADMIN & SCRIPT CONFIGURATION
+    // ========================================================
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzKu6y0R-kswbA44qA1Kf-oFaRijzP6Mwm4-EcqPKyv_RrAw0__aF3GItUEpQHIk_Pw/exec";
+    const TELEGRAM_HANDLE = "teamPhantom98"; 
+
+    const batches = {
+      'cds-math':      { name: "CDS Mathematics", price: "20", qr: "20.jpeg" },
+      'cds-ota':       { name: "CDS OTA Batch",    price: "40", qr: "40.jpeg" },
+      'afcat':         { name: "AFCAT Complete",   price: "35", qr: "35.jpeg" },
+      'capf':          { name: "CAPF AC Master",   price: "35", qr: "35.jpeg" },
+      'defense-combo': { name: "Defense Mega Combo (All-in-One)", price: "110", qr: "110.jpeg" } // 👈 Combo Batch Added
+    };
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedKey = urlParams.get('batch') || 'cds-math';
+    const active = batches[selectedKey] || batches['cds-math'];
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("batch-title").innerText = active.name;
+      document.getElementById("batch-fee").innerText = "Course Fee: ₹" + active.price;
+
+      // QR Code Load Logic
+      const qrElement = document.querySelector(".qr-wrap img");
+      if (qrElement) {
+        qrElement.src = active.qr;
+        qrElement.onerror = () => { qrElement.src = "my-qr.jpeg"; }; // अगर 110.jpeg नहीं मिली तो my-qr.jpeg दिखाएगा
+      }
+
+      const savedUtr = localStorage.getItem("utr_" + selectedKey);
+      if (savedUtr) {
+        showStatusView(savedUtr);
+      }
+    });
+
+    // 1. ईमेल अलर्ट भेजने वाला फंक्शन
+    async function submitPayment() {
+      const name = document.getElementById("s-name").value.trim();
+      const utr = document.getElementById("s-utr").value.trim();
+
+      if (!name) {
+        alert("Please enter your Full Name.");
+        return;
+      }
+      if (!utr) {
+        alert("Please enter the 12-digit UPI UTR / Transaction ID.");
+        return;
+      }
+
+      const btn = document.getElementById("confirm-btn");
+      btn.innerText = "Submitting Request...";
+      btn.disabled = true;
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({
+            name: name,
+            batchId: selectedKey,
+            batchName: active.name,
+            fee: active.price,
+            utr: utr
+          })
+        });
+
+        localStorage.setItem("utr_" + selectedKey, utr);
+        showStatusView(utr);
+      } catch (err) {
+        alert("Unable to connect. Please check internet connection.");
+        btn.innerText = "Confirm Payment & Request Access";
+        btn.disabled = false;
+      }
+    }
+
+    // 2. टेलीग्राम पर स्क्रीनशॉट भेजने वाला फंक्शन
+    function sendTelegramProof() {
+      const name = document.getElementById("s-name").value.trim() || "Candidate";
+      const utr = document.getElementById("s-utr").value.trim() || localStorage.getItem("utr_" + selectedKey) || "Not Entered";
+
+      const messageText = `Hello Admin, I have paid the fee for ${active.name}.%0A%0A` +
+                          `• Student Name: ${encodeURIComponent(name)}%0A` +
+                          `• Batch: ${encodeURIComponent(active.name)} (₹${active.price})%0A` +
+                          `• UPI UTR: ${encodeURIComponent(utr)}%0A%0A` +
+                          `I am attaching my payment screenshot below. Please verify and grant access.`;
+
+      window.open(`https://t.me/${TELEGRAM_HANDLE}?text=${messageText}`, "_blank");
+    }
+
+    function showStatusView(utr) {
+      document.getElementById("form-container").style.display = "none";
+      document.getElementById("status-panel").style.display = "block";
+      pollStatus(utr);
+    }
+
+    // 3. बैकग्राउंड में चेक करना कि एडमिन ने फोन से APPROVE दबाया या नहीं
+    function pollStatus(utr) {
+      const timer = setInterval(async () => {
+        try {
+          const res = await fetch(`${SCRIPT_URL}?action=check&batch=${encodeURIComponent(selectedKey)}&utr=${encodeURIComponent(utr)}`);
+          const data = await res.json();
+
+          if (data.status === "APPROVED") {
+            clearInterval(timer);
+            document.getElementById("status-title").style.color = "#22c55e";
+            document.getElementById("status-title").innerText = "Payment Verified & Approved! 🎖️";
+            document.getElementById("status-desc").innerText = "Administrator has verified your payment records. Your classroom is now unlocked.";
+
+            const enterBtn = document.getElementById("enter-btn");
+            enterBtn.href = `classroom.html?batch=${selectedKey}&utr=${encodeURIComponent(utr)}`;
+            enterBtn.style.display = "block";
+          } else if (data.status === "REJECTED") {
+            clearInterval(timer);
+            document.getElementById("status-title").style.color = "#ef4444";
+            document.getElementById("status-title").innerText = "Verification Declined ❌";
+            document.getElementById("status-desc").innerText = "Provided UTR could not be matched with bank transactions. Contact admin on Telegram.";
+          }
+        } catch (e) {}
+      }, 4000);
+    }
+  </script>
+</body>
+</html>

@@ -7,7 +7,7 @@
   
   <!-- Google Fonts: Rajdhani & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rajdhani:wght@600;700;800&display=swap" rel="stylesheet">
 
   <style>
@@ -588,7 +588,7 @@
         </div>
       </div>
 
-      <!-- 5. ALL-IN-ONE DEFENSE COMBO - ₹110 (NEW BATCH) -->
+      <!-- 5. ALL-IN-ONE DEFENSE COMBO - ₹110 -->
       <div class="batch-card" style="border: 2px solid var(--accent-gold); background: linear-gradient(180deg, rgba(245, 158, 11, 0.07) 0%, var(--card-bg) 100%);">
         <div style="position: absolute; top: -11px; right: 18px; background: var(--accent-gold); color: #000; font-weight: 800; font-size: 10.5px; padding: 3px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 1px;">
           Best Value Deal 🔥
@@ -646,23 +646,6 @@
     function goToPayment(batchName) {
       window.location.href = "payment.html?batch=" + batchName;
     }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      // defense-combo key added to verification list
-      const batchKeys = ['cds-math', 'cds-ota', 'afcat', 'capf', 'defense-combo'];
-      
-      batchKeys.forEach(batchId => {
-        if (localStorage.getItem("utr_" + batchId)) {
-          const btn = document.querySelector(`a[href="payment.html?batch=${batchId}"]`);
-          if (btn) {
-            btn.innerText = "Go to Classroom 🟢";
-            btn.style.background = "linear-gradient(135deg, #22c55e, #16a34a)";
-            btn.style.color = "#ffffff";
-            btn.href = `classroom.html?batch=${batchId}`;
-          }
-        }
-      });
-    });
   </script>
 </body>
 </html>
